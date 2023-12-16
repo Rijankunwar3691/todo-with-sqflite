@@ -1,0 +1,4 @@
+#Sat Dec 16 10:52:38 NPT 2023
+base.0=D\:\\todowithmvc\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+renamed.0=classes.dex
+path.0=classes.dex
