@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:todowithmvc/controller/filter_tasks_controller.dart';
 import 'package:todowithmvc/controller/todo_task_controller.dart';
 import 'package:todowithmvc/model/todo_model.dart';
+import 'package:todowithmvc/services/notification_service.dart';
 import 'package:todowithmvc/utils/export.dart';
 import 'package:todowithmvc/utils/widgets/date_time_picker.dart';
 import 'package:todowithmvc/utils/widgets/messenger.dart';
@@ -23,6 +24,15 @@ class _TodoPageState extends ConsumerState<TodoPage> {
   TextEditingController timeController = TextEditingController();
 
   final formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    super.initState();
+    NotificationService notificationService = NotificationService();
+    notificationService.initializeNotification();
+    notificationService.displayNotification();
+  }
+
   @override
   void dispose() {
     timeController.dispose();
@@ -271,7 +281,7 @@ class _TodoPageState extends ConsumerState<TodoPage> {
                                   },
                                   icon: const Icon(Icons.access_time)),
                               validator: (value) {
-                                if (value == '0 : 0') {
+                                if (value == '0 : 0' || value!.isEmpty) {
                                   return 'time is required';
                                 }
                                 return null;
