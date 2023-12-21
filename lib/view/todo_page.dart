@@ -26,14 +26,6 @@ class _TodoPageState extends ConsumerState<TodoPage> {
   final formKey = GlobalKey<FormState>();
 
   @override
-  void initState() {
-    super.initState();
-    NotificationService notificationService = NotificationService();
-    notificationService.initializeNotification();
-    notificationService.displayNotification();
-  }
-
-  @override
   void dispose() {
     timeController.dispose();
     timeController.dispose();
@@ -303,6 +295,11 @@ class _TodoPageState extends ConsumerState<TodoPage> {
                             );
                             if (formKey.currentState!.validate()) {
                               ref.read(todoProvider.notifier).addTodo(todo);
+                              NotificationService().displayNotification(
+                                  title: 'Reminder',
+                                  body: titleController.text,
+                                  scheduledDate:
+                                      DateTime.parse('2023-12-21 19:02:00'));
                               titleController.clear();
                               timeController.clear();
                               dateController.clear();
