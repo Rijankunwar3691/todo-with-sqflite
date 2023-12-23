@@ -8,8 +8,12 @@ class NotificationService {
 
   /// this function initializes local notification
   Future<void> initializeNotification() async {
+    flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>()!
+        .requestNotificationsPermission();
     AndroidInitializationSettings androidInitializationSettings =
-        const AndroidInitializationSettings('ic_launcher');
+        const AndroidInitializationSettings('@mipmap/ic_launcher');
 
     InitializationSettings initializationSettings =
         InitializationSettings(android: androidInitializationSettings);
@@ -17,21 +21,23 @@ class NotificationService {
     await flutterLocalNotificationsPlugin.initialize(initializationSettings);
   }
 
-  void displayNotification(
+  Future<void> displayNotification(
       {int id = 0,
       String? title,
       String? body,
-      required DateTime scheduledDate}) {
+      required DateTime scheduledDate}) async {
     AndroidNotificationDetails androidNotificationDetails =
-        const AndroidNotificationDetails('your channel id', 'your channel name',
-            channelDescription: 'ff',
+        const AndroidNotificationDetails('your channel', 'your channel name',
+            channelDescription: 'your channel description',
             importance: Importance.max,
             priority: Priority.high);
     NotificationDetails notificationDetails =
         NotificationDetails(android: androidNotificationDetails);
-    flutterLocalNotificationsPlugin.zonedSchedule(id, title, body,
+
+    flutterLocalNotificationsPlugin.zonedSchedule(200, title, body,
         tz.TZDateTime.from(scheduledDate, tz.local), notificationDetails,
         uiLocalNotificationDateInterpretation:
-            UILocalNotificationDateInterpretation.absoluteTime);
+            UILocalNotificationDateInterpretation.absoluteTime,
+        androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle);
   }
 }

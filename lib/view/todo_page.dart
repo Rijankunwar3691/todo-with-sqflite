@@ -268,13 +268,13 @@ class _TodoPageState extends ConsumerState<TodoPage> {
                                     timePicker(context).then((value) {
                                       setState(() {
                                         timeController.text =
-                                            '${value.hour.toString()}:${value.minute.toString()}';
+                                            '${value.hour.toString().padLeft(2, '0')}:${value.minute.toString().padLeft(2, '0')}';
                                       });
                                     });
                                   },
                                   icon: const Icon(Icons.access_time)),
                               validator: (value) {
-                                if (value == '0 : 0' || value!.isEmpty) {
+                                if (value == '00 : 00' || value!.isEmpty) {
                                   return 'time is required';
                                 }
                                 return null;
@@ -302,7 +302,7 @@ class _TodoPageState extends ConsumerState<TodoPage> {
                                   scheduledDate: ref
                                       .read(dateTimeConverterProvider)
                                       .stringToDateTime(
-                                          '${dateController.text} ${timeController.text}'));
+                                          '${dateController.text.padLeft(2, '0')} ${timeController.text.padLeft(2, '0')}'));
 
                               titleController.clear();
                               timeController.clear();

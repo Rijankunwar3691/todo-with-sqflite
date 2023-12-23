@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:timezone/data/latest.dart' as tz;
+import 'package:todowithmvc/services/notification_service.dart';
 
 import 'package:todowithmvc/utils/export.dart';
 import 'package:todowithmvc/view/todo_page.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   tz.initializeTimeZones();
+  NotificationService().initializeNotification();
   return runApp(const ProviderScope(child: MyApp()));
 }
 

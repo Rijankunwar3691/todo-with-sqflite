@@ -23,8 +23,8 @@ Future<TimeOfDay> timePicker(BuildContext context) async {
     return pickedDate;
   } else {
     return const TimeOfDay(
-      hour: 0,
-      minute: 0,
+      hour: 00,
+      minute: 00,
     );
   }
 }
