@@ -8,9 +8,8 @@ Future<String> datePicker(BuildContext context) async {
       firstDate: DateTime(2023),
       lastDate: DateTime(2090));
 
-
   if (pickedDate != null) {
-    return DateFormat('MMM dd, yyyy').format(pickedDate);
+    return DateFormat('yyyy-MM-dd').format(pickedDate);
   } else {
     return '';
   }
@@ -23,6 +22,9 @@ Future<TimeOfDay> timePicker(BuildContext context) async {
   if (pickedDate != null) {
     return pickedDate;
   } else {
-    return const TimeOfDay(hour: 0, minute: 0);
+    return const TimeOfDay(
+      hour: 0,
+      minute: 0,
+    );
   }
 }

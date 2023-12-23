@@ -23,7 +23,7 @@ class NotificationService {
       String? body,
       required DateTime scheduledDate}) {
     AndroidNotificationDetails androidNotificationDetails =
-        const AndroidNotificationDetails('ff', 'ff',
+        const AndroidNotificationDetails('your channel id', 'your channel name',
             channelDescription: 'ff',
             importance: Importance.max,
             priority: Priority.high);
@@ -33,6 +33,5 @@ class NotificationService {
         tz.TZDateTime.from(scheduledDate, tz.local), notificationDetails,
         uiLocalNotificationDateInterpretation:
             UILocalNotificationDateInterpretation.absoluteTime);
-    print(scheduledDate);
   }
 }

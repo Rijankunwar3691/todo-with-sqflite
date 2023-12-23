@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:todowithmvc/controller/date_time_controller.dart';
 import 'package:todowithmvc/controller/filter_tasks_controller.dart';
 import 'package:todowithmvc/controller/todo_task_controller.dart';
 import 'package:todowithmvc/model/todo_model.dart';
@@ -267,7 +268,7 @@ class _TodoPageState extends ConsumerState<TodoPage> {
                                     timePicker(context).then((value) {
                                       setState(() {
                                         timeController.text =
-                                            '${value.hour.toString()} : ${value.minute.toString()}';
+                                            '${value.hour.toString()}:${value.minute.toString()}';
                                       });
                                     });
                                   },
@@ -298,8 +299,11 @@ class _TodoPageState extends ConsumerState<TodoPage> {
                               NotificationService().displayNotification(
                                   title: 'Reminder',
                                   body: titleController.text,
-                                  scheduledDate:
-                                      DateTime.parse('2023-12-21 19:02:00'));
+                                  scheduledDate: ref
+                                      .read(dateTimeConverterProvider)
+                                      .stringToDateTime(
+                                          '${dateController.text} ${timeController.text}'));
+
                               titleController.clear();
                               timeController.clear();
                               dateController.clear();
